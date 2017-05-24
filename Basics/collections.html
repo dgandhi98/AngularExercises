@@ -136,6 +136,14 @@
     </table>
   </div>
 
+  <h4>-start and -end</h4>
+  <dl ng-controller="ItemsController">
+    <dt ng-repeat-start="item in items">name</dt>
+    <dd ng-bind="item.name"></dd>
+    <dt>price</dt>
+    <dd ng-repeat-end ng-bind="item.price">name</dd>
+  </dl>
+
 </div>
 </body>
 </html>

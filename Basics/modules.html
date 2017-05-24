@@ -1,0 +1,27 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+<script src="./js/modules.js"></script>
+<link rel="stylesheet" href="./css/ng-animate.css"></link>
+<body >
+<div ng-app="app">
+  <h4>Regular App Module + Controller</h4>
+  <p ng-controller="MessageController">
+    {{message}}
+  </p>
+  <h4>Chained Controllers</h4>
+  <p ng-controller="MessageController2">
+    {{message}}
+  </p>
+  <p ng-controller="AnotherMessageController2">
+    {{message}}
+  </p>
+  <h4>Loading Modules</h4>
+  <input type ="checkbox" ng-model="showMessage">
+  Check the box to show the message
+  <h2 ng-show="showMessage">
+    The secret message.
+  </h2>
+</div>
+</body>
+</html>
