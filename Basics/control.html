@@ -1,0 +1,35 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="./js/control.js"></script>
+<body ng-app="app">
+  <h1>Controllers</h1>
+  <h4>ng-controller</h4>
+  <p ng-controller="MessageController as controller">
+    {{controller.message}}
+  </p>
+  <p ng-controller="ScopedMessageController">
+    {{message}}
+  </p>
+  <h4>ng-controller: using functions</h4>
+  <p ng-controller="CountController">
+    There are {{count()}} months in a year.
+  </p>
+  <div ng-controller="AdditionController">
+  <select ng-model="operand1" ng-options="x for x in options"></select>
+   +
+  <select ng-model="operand2" ng-options="x for x in options"></select>
+  = {{add()}}
+  </select>
+  </div>
+
+  <h4>ng-controller: callbacks</h4>
+  <div ng-controller="AuthController">
+    <p>
+        The secret code is
+        <span ng-show="authorized3">0123</span>
+        <span ng-hide="authorized3">cant see this</span>
+    </p>
+    <input class = "btn btn-xs btn-default" type="button" value="toggle" ng-click="toggle()">
+  </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="./js/collections.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body ng-app="app">
+<div class="container">
+
+  <h1>Collections</h1>
+
+  <h4>ng-repeat</h4>
+  <ol ng-controller="ItemsController">
+    <li ng-repeat="item in items">
+      {{item.name}}: ${{item.price}}
+    </li>
+  </ol>
+
+  <h4>(key,value) in object syntax</h4>
+  <table class="table table-condensed">
+    <tr ng-repeat="(propertyName, propertyValue) in {b: 'two', a:1.0, c:3}">
+      <td ng-bind="propertyName"></td>
+      <td ng-bind="propertyValue"></td>
+    </tr>
+  </table>
+
+  <h4>$index</h4>
+  <div ng-controller="ItemsController">
+    <div ng-repeat="item in items">
+      {{$index + 1}}. {{item.name}}
+    </div>
+  </div>
+
+  <h4>Nested</h4>
+  <ol ng-controller="ItemsControllerNest">
+    <li ng-repeat="TopItem in items">
+      {{TopItem.name}}
+      <ol>
+        <li ng-repeat="NestItem in TopItem.items">
+          {{NestItem.name}}
+        </li>
+      </ol>
+    </li>
+  </ol>
+  <h4>Nested $index</h4>
+  <div ng-controller="ItemsControllerNest">
+    <div ng-repeat="item in items" ng-init="OuterCount=$index+1">
+      {{OuterCount}}. {{item.name}}
+      <div ng-repeat="nestItem in item.items">
+        {{OuterCount}}.{{$index+1}} {{nestItem.name}}
+      </div>
+    </div>
+  </div>
+
+  <h4>$first, $middle, $last, $even, $odd</h4>
+  <ol>
+    <li ng-repeat="val in [1,2,3,4,5]">
+      <span class="label label-default"
+        ng-class="{'label-success': $middle}">
+        {{val}}
+    </li>
+  </ol>
+  <ol>
+    <li ng-repeat="val in [1,2,3,4,5]">
+      <span class="label label-default"
+        ng-class="{'label-success': !$middle}">
+        {{val}}
+    </li>
+  </ol>
+  <ol>
+    <li ng-repeat="val in [1,2,3,4,5]">
+      <span class="label label-default"
+        ng-class="{'label-success': $first || $last}">
+        {{val}}
+    </li>
+  </ol>
+  <ol>
+    <li ng-repeat="val in [1,2,3,4,5]">
+      <span class="label label-default"
+        ng-class="{'label-success': !($first || $last)}">
+        {{val}}
+    </li>
+  </ol>
+  <ol>
+    <li ng-repeat="val in [1,2,3,4,5]">
+      <span class="label label-default"
+        ng-class="{'label-success': !$even}">
+        {{val}}
+    </li>
+  </ol>
+
+  <h4>Strict Equality</h4>
+  <table class="table table-condensed">
+    <tr>
+      <td>1===1</td>
+      <td>{{1===1}}</td>
+    </tr>
+    <tr>
+      <td>'1'==='1'</td>
+      <td>{{'1'==='1'}}</td>
+    </tr>
+    <tr>
+      <td>1==='1'</td>
+      <td>{{1==='1'}}</td>
+    </tr>
+    <tr>
+      <td>{}==={}</td>
+      <td>{{ {} === {} }}</td>
+    </tr>
+    <tr>
+      <td>{name:1}==={name:1}</td>
+      <td>{{ {name:1} === {name:1} }}</td>
+    </tr>
+  </table>
+
+
+  <h4>Track By</h4>
+  <p>Duplicates: Strict Equality causes duplicate errors with ng-repeat</p>
+  <ol>
+    <!--li ng-repeat="val in [1,2,1]" ng-bind="val"></li-->
+    <li ng-repeat="val in [1,2,1] track by $index" ng-bind="val"></li>
+  </ol>
+
+  <h4>Callback Functions</h4>
+  <div ng-controller="ItemsControllerCall">
+    <h4 ng-pluralize count="items.length"
+      when="{'one':'1 item', 'other':'{} items'}">
+    </h4>
+    <table class="table table-condensed">
+      <tr ng-repeat="item in items">
+        <td ng-bind="item.name"></td>
+        <td>
+          <button class="btn btn-xs btn-default" ng-click="destroy(click)">
+            destroy
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

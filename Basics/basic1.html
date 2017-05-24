@@ -1,0 +1,96 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<body ng-app>
+  <h1>Expressions</h1>
+  <p>The number is {{3+4}}</p>
+  <p>Are strings and numbers equal? {{2=='2'}}</p>
+  <p>Are strings and numbers equal? {{2==='2'}}</p>
+  <p>{{"Angular" + "js".toUpperCase()}}</p>
+  <p>{{a=1;a+a}}</p>
+  <p>{{a=1}} remains {{a}}</p>
+  <p>{{a=1}} remains {{a}}</p>
+  <p>There {{count=1;(count==1 ? "is ":"are ") + count}} of them</p>
+  <p>{{a=1;++a}}</p>
+  <h4>Angular expressions are not javascript, we cannot use var, for, etc. as javascript has.</h4>
+
+  <br />
+
+  <h1>Directives</h1>
+  <h4>Sort of like custom HTML, each starts with the prefix "ng"</h4>
+  <h4>ng-bind</h4>
+  <p>The number <span ng-bind="3+4"></span>.</p>
+  <h4>ng-init</h4>
+  <div ng-init="sum=3+2">
+    <p>
+      {{sum+1}} is more than
+      <span ng-bind='sum-1'></span>
+    </p>
+  </div>
+  <div ng-init="counter=7; units='days'; collection='week'">
+    <p>
+      There are {{counter}} {{units}} in a {{collection}}.
+    </p>
+  </div>
+  <div ng-init="time={counter:12, units:'months', collection:'year'}">
+    <p>
+      There are {{time.counter}} {{time.units}} in a {{time.collection}}.
+    </p>
+  </div>
+  <div ng-init="months=['January','February','March','April']">
+    <p>
+      {{months[3]}} follows {{months[2]}} in {{months}}.
+    </p>
+  </div>
+  <h4>ng-non-bindable</h4>
+  <p ng-non-bindable>
+    {{2*2}} is the same as <span ng-bind="2+2">?</span>
+  </p>
+  <h4>ng-show</h4>
+  <p ng-init="authorized=true">
+    The secret code is
+    <span ng-show="authorized">0123</span>
+    <span ng-hide="authorized">you cant see!</span>
+  </p>
+
+
+  <br />
+
+  <h1>Scopes</h1>
+  <h4>Two-Way Binding</h4>
+  <p ng-init="authorized2=true">
+    The secret code is
+    <span ng-show="authorized2">0123</span>
+    <span ng-hide="authorized2">you cant see!</span>
+    <br />
+    <input type="button" value="toggle" ng-click="authorized2=!authorized2">
+  </p>
+  <h4>ng-model: text</h4>
+  <input type="text" ng-model="title">
+  is bound to "<strong ng-bind="title"></strong>".
+  Type something in the box!
+  <h4>ng-model: checkbox</h4>
+  <input type="checkbox" ng-init="feeling='love it'" ng-model='feeling'
+  ng-true-value='"love it"' ng-false-value='"hate it"'>
+  is bound to
+  "<strong ng-bind="feeling"></strong>"
+  Change It!
+  <h4>ng-model: select</h4>
+  <select ng-init='answer="maybe"' ng-model="answer">
+    <option value='yes' selected>Yes</option>
+    <option value='no'>No</option>
+    <option value='maybe'>Maybe</option>
+  </select>
+  is bound to
+  "<strong ng-bind="answer"></strong>"
+  Change It!
+  <h4>ng-model: radio</h4>
+  <div ng-init='answer2="maybe"' >
+    <input type="radio" value='yes' ng-model="answer2">Yes</input>
+    <input type="radio" value='no' ng-model="answer2">No</input>
+    <input type="radio" value='maybe' ng-model="answer2">Maybe</input>
+  </div>
+  is bound to
+  "<strong ng-bind="answer2"></strong>"
+  Change It!
+</body>
+</html>

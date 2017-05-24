@@ -1,0 +1,64 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="./js/scopes.js"></script>
+<body ng-app="app">
+  <p ng-controller="NameController">
+    {{name}}
+  </p>
+  <p ng-controller="SecondNameController">
+    {{name}}
+  </p>
+  <p ng-controller="RootNameController">
+    {{name}}
+  </p>
+  <p ng-controller="SecondRootNameController">
+    {{name}}
+  </p>
+  <br />
+  <h4>Nested</h4>
+  <div ng-controller="NameController">
+    <p>
+      {{name}}
+    </p>
+    <p ng-controller="SecondNameController">
+    {{name}}
+    </p>
+  </div>
+  <h4>Nested 2</h4>
+  <div ng-controller="NameController">
+    <p>
+      {{name}} and {{childName}}
+    </p>
+    <p ng-controller="ChildNameController">
+      {{name}} and {{childName}}
+    </p>
+    <input type="text" ng-model="name">
+  </div>
+
+  <h4>Prototypal Inheritance</h4>
+  <div ng-controller="NameController">
+    <p>
+      {{name}} and {{childName}}
+      <input type="text" ng-model="name">
+    </p>
+    <p ng-controller="ChildNameController">
+      {{name}} and {{childName}}
+      <input type="text" ng-model="name">
+  </div>
+
+  <h4>scope.$watch</h4>
+  <p ng-controller="SumController">
+    <select ng-model="newValue" ng-options="n for n in [1,2,3]"></select>
+    <input type="button" value="Add" ng-click="add()">
+    The sum of {{values}} is {{sum}}
+  </p>
+
+  <h4>scope.$apply</h4>
+  <div ng-controller="EscapeController">
+    <input type="text" ng-model="message">
+    is bound to
+    "<strong ng-bind="message"></strong>".
+    Press <code>esc</code> to clear it!
+  </div>
+</body>
+</html>
