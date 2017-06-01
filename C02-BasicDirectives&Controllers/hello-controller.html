@@ -1,0 +1,26 @@
+<html ng-app='currApp'>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<body>
+<div ng-controller="MainCtrl as ctrl">
+  <p>
+    {{ctrl.helloMSG}} AngularJS.
+  </p>
+  <p>
+    {{ctrl.goodbyeMSG}} AngularJS
+  </p>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+angular.module('currApp', [])
+  .controller('MainCtrl',[function() {
+    this.helloMSG = "Hello, ";
+    var goodbyeMSG = "Good Bye!";
+  }]);
+</script>
+</body>
+
+</html>
