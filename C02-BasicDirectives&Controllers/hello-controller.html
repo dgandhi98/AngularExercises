@@ -1,6 +1,9 @@
 <html ng-app='currApp'>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
 <body>
+  <!--This uses somethinc called the ControllerAs syntax. In earlier versions,
+      we used to use $scope, but this syntax allows us to name the controller
+      more explicitly in the HTML.-->
 <div ng-controller="MainCtrl as ctrl">
   <p>
     {{ctrl.helloMSG}} AngularJS.
@@ -9,16 +12,35 @@
     {{ctrl.goodbyeMSG}} AngularJS
   </p>
 </div>
-
-
-
-
-
+<br />
+<div ng-controller="btnCtrl as ctrl">
+  <p>
+    {{ctrl.message}} AngularJS.
+  </p>
+  <button ng-click="ctrl.changeMessage()">
+    Click me to change the message
+  </button>
+</div>
 <script type="text/javascript">
 angular.module('currApp', [])
   .controller('MainCtrl',[function() {
     this.helloMSG = "Hello, ";
     var goodbyeMSG = "Good Bye!";
+  }])
+  .controller('btnCtrl',[function() {
+    var self = this; // we do this because 'this' will change scope under
+                    //different functions, so proxying is good practice
+    self.helloMSG = "Hello, ";
+    self.goodbyeMSG = "See you later, ";
+    self.message = self.helloMSG;
+    self.changeMessage = function() {
+      if(self.message === self.goodbyeMSG) {
+        self.message = self.helloMSG;
+      }
+      else {
+        self.message = self.goodbyeMSG;
+      }
+    };
   }]);
 </script>
 </body>
