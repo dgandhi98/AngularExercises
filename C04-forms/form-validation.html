@@ -1,0 +1,87 @@
+<html ng-app="notesApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <style>
+  .username.ng-valid {
+    background-color: lightgreen;
+  }
+  .username.ng-dirty.ng-invalid-required {
+    background-color: red;
+  }
+  .username.ng-dirty.ng-invalid-minlength {
+    background-color: lightpink;
+  }
+  </style>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+
+<!--
+Form states in angular:
+$invalid: when any validations mark the fields invalid
+$valid: inverse of $invalid
+$pristine: the initial state of the form. Allows you to see if user has started
+modifying the form
+$dirty: inverse of pristine
+$error
+
+angularjs validators:
+required: invalid until filled out
+ng-required: conditionally required based on some boolean
+ng-minlength: sets the min legnth of the value required
+ng-maxlength: sets max length of the value required
+ng-pattern: checked against a regexp pattern
+type="email": checks if email
+type="number": checks if a number
+type="date": hows an html datepicker
+type="url": URL validation
+-->
+  <form ng-submit="ctrl.submit()" name="myForm">
+    <input type="text"
+      name="uname"
+      class="username"
+      ng-model="ctrl.user.username"
+      required
+      ng-minlength="4" />
+    <br />
+    <span ng-show="myForm.uname.$error.required && myForm.uname.$dirty">
+      This is a required field.
+    </span>
+    <br />
+    <span ng-show="myForm.uname.$error.minlength && myForm.uname.$dirty">
+      Minimum length is 4
+    </span>
+    <br />
+    <span ng-show="myForm.uname.$invalid && myForm.uname.$dirty">
+      This field is invalid
+    </span>
+
+    <br />
+
+    <input type="password"
+      name="pwd"
+      ng-model="ctrl.user.password"
+      required />
+
+    <br />
+
+    <span ng-show="myForm.pwd.$error.required && myForm.uname.$dirty">
+      This is a required field
+    </span>
+
+    <br />
+
+    <input type="submit"
+      value="Submit"
+      ng-disabled="myForm.$invalid" />
+  </form>
+</body>
+<script type="text/javascript">
+  angular.module('notesApp', [])
+    .controller('MainCtrl', [function(){
+      var self = this;
+      self.submit = function() {
+        console.log('User clicked submit with ', self.user);
+      };
+    }]);
+</script>
+</html>
