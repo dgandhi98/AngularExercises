@@ -1,0 +1,17 @@
+<html ng-app="notesApp">
+<body ng-controller="MainCtrl as mainCtrl">
+  <h1>Hello Services!</h1>
+  <button ng-click="mainCtrl.logStuff()">Log Something</button>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+  <script type="text/javascript">
+    angular.module('notesApp',[])
+      .controller('MainCtrl',['$log', function($log) {
+        //safe style of dependency injections, remember order matters
+        var self = this;
+        self.logStuff = function() {
+          $log.log('Button was pressed');
+        };
+      }])
+  </script>
+</body>
+</html>
